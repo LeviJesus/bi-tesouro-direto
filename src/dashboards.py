@@ -41,10 +41,13 @@ def fig_evolucao_taxas(base):
         tipo_de_traco.append(tipo)
     botoes = [dict(label=t, method="update",
                    args=[{"visible": [x == t for x in tipo_de_traco]},
-                         {"title": f"Evolução da taxa de venda — {t}"}]) for t in tipos]
-    fig.update_layout(**LAYOUT, title=f"Evolução da taxa de venda — {tipos[0]}",
+                         {"title.text": f"Evolução da taxa de venda — {t}"}]) for t in tipos]
+    # margem superior maior: título no topo e o menu logo acima do gráfico, sem sobrepor
+    layout = {**LAYOUT, "margin": dict(l=60, r=30, t=120, b=50)}
+    fig.update_layout(**layout, title=dict(text=f"Evolução da taxa de venda — {tipos[0]}", y=0.97, yanchor="top"),
                       yaxis_title="Taxa de venda (% a.a.)",
-                      updatemenus=[dict(buttons=botoes, x=0, y=1.18, xanchor="left", direction="down")])
+                      updatemenus=[dict(buttons=botoes, x=0, y=1.0, xanchor="left", yanchor="bottom",
+                                        direction="down", pad=dict(b=8))])
     return fig
 
 

@@ -9,6 +9,7 @@ from plotly.subplots import make_subplots
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import config
+from src.preditivo import treinar_e_avaliar
 from src.metricas import adicionar_taxas_equivalentes, calcular_kpis
 from src.warehouse import abrir_dw, carregar_base
 
@@ -187,4 +188,4 @@ def gerar_dashboard(previsao=None, destino=None):
 
 
 if __name__ == "__main__":
-    gerar_dashboard()
+    gerar_dashboard(previsao=treinar_e_avaliar())
